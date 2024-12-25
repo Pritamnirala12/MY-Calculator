@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, red,pink,rgb(206, 175, 175), blue, yellow, green, black);
+            animation: gradient 3s ease infinite;
+            background-size: 400% 400%;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .btn:active {
+            transform: scale(0.95);
+            background-color: #4f7e23; /* Darker shade for click effect */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xs">
+        <h1 class="text-2xl font-bold text-center mb-4">Simple Calculator</h1>
+        <div class="bg-gray-200 p-4 rounded-lg mb-4 text-right text-2xl font-mono" id="display">0</div>
+        <div class="grid grid-cols-4 gap-2">
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="clearDisplay()">C</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('/')">/</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('*')">*</button>
+            <button class="btn bg-red-500 p-4 rounded-lg text-white font-bold" onclick="deleteLast()">DEL</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('7')">7</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('8')">8</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('9')">9</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('-')">-</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('4')">4</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('5')">5</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('6')">6</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('+')">+</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('1')">1</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('2')">2</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('3')">3</button>
+            <button class="btn bg-blue-500 p-4 rounded-lg text-white font-bold row-span-2" onclick="calculateResult()">=</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold col-span-2" onclick="appendToDisplay('0')">0</button>
+            <button class="btn bg-gray-300 p-4 rounded-lg text-black font-bold" onclick="appendToDisplay('.')">.</button>
+        </div>
+        <div class="mt-4 p-4 bg-gray-100 rounded-lg text-center">
+            <p class="text-sm text-gray-700">Created by Pritam Kumar, Diploma CSE</p>
+        </div>
+    </div>
+
+    <script>
+        function clearDisplay() {
+            document.getElementById('display').innerText = '0';
+        }
+
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            if (display.innerText === '0') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function deleteLast() {
+            const display = document.getElementById('display');
+            display.innerText = display.innerText.slice(0, -1) || '0';
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                display.innerText = eval(display.innerText);
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
